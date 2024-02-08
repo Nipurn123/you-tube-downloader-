@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from pytube import YouTube, Playlist
 
@@ -6,7 +7,7 @@ class YouTubeDownloaderGUI:
         st.title("YouTube Downloader")
 
         self.url = st.text_input("Enter YouTube URL:")
-        self.path = st.text_input("Select Download Path:")
+        self.path = st.text_input("Select Download Path:", value=os.path.expanduser("~/Downloads"))
 
         self.download_button = st.button("Download")
 
