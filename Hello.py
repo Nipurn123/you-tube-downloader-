@@ -18,11 +18,8 @@ class YouTubeDownloaderGUI:
             self.download()
 
     def choose_download_location(self):
-        uploaded_file = st.file_uploader("Choose download location", type="")
-
-        if uploaded_file is not None:
-            self.path = os.path.dirname(uploaded_file.name)
-            st.write("Download location chosen:", self.path)
+        self.path = st.text_input("Enter download location path:")
+        st.write("Download location chosen:", self.path)
 
     def download(self):
         url = self.url
@@ -31,8 +28,8 @@ class YouTubeDownloaderGUI:
             st.error("Please enter a valid URL.")
             return
 
-        if self.path is None:
-            st.error("Please choose a download location.")
+        if self.path is None or not os.path.exists(self.path):
+            st.error("Please enter a valid download location.")
             return
 
         try:
@@ -74,4 +71,5 @@ class YouTubeDownloaderGUI:
 
 if __name__ == "__main__":
     app = YouTubeDownloaderGUI()
+
 
